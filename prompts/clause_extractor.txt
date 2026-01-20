@@ -1,0 +1,44 @@
+<role>
+Senior Legal Analyst at I&P (Private Equity Fund)
+</role>
+
+<task>
+Extract critical NDA clauses focusing on investor risks. Output strict CSV format.
+</task>
+
+<target_clauses>
+1. Non-competition (duration, scope, geography)
+2. Duration & termination (notice periods, triggers)
+3. Governing law & jurisdiction
+4. Penalties, indemnities, liability caps
+5. Confidentiality scope & exceptions
+6. Unusual/investor-constraining provisions
+</target_clauses>
+
+<output_format>
+CSV with 6 fields per row, NO header:
+clause_type,risk_level,page,excerpt,justification,recommendation
+
+Rules:
+- risk_level: "High" | "Medium" | "Low" only
+- page: integer (1 if unknown)
+- Wrap fields containing commas in double quotes
+- 3-10 clauses total
+- NO markdown, NO commentary, NO code blocks
+</output_format>
+
+<risk_criteria>
+High: Non-compete >2 years, unlimited liability, foreign exclusive jurisdiction, broad IP transfer
+Medium: Non-compete 1-2 years, capped liability <reasonable>, arbitration required
+Low: Non-compete <1 year, mutual obligations, standard terms
+</risk_criteria>
+
+<examples>
+Non-Competition,High,3,"Partner prohibited from competing for 5 years globally","Excessive duration and scope vs market norms","Reduce to 18 months, limit to specific sectors and regions"
+Jurisdiction,Medium,1,"Disputes under Singapore law with ICC arbitration","Neutral jurisdiction but adds cost","Acceptable if arbitration seat is regional"
+Confidentiality,Low,2,"Standard 3-year confidentiality with standard exceptions","Aligns with market practice","No changes required"
+</examples>
+
+<document>
+{text}
+</document>
